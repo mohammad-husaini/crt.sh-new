@@ -1,0 +1,39 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  width: calc(100% / 3);
+  height: 3vh;
+}
+tr {
+  width: 100%;
+
+  display: flex;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.center-table {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-height: 80vh;
+  width: 70%;
+  overflow-y: scroll;
+}
+.center-table::-webkit-scrollbar {
+  display: none;
+}
