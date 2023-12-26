@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const SearchBar = (props) => {
   const [search, setSearch] = useState();
-  const { getDataFromSearchBar } = props;
 
   const navigate = useNavigate();
 
@@ -13,8 +12,9 @@ const SearchBar = (props) => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    getDataFromSearchBar(search);
-    navigate("result");
+    if (search) {
+      navigate(`result/${search}`);
+    }
   };
 
   return (
@@ -29,6 +29,7 @@ const SearchBar = (props) => {
         />
 
         <svg
+          onClick={handleOnSubmit}
           className="search-icon"
           xmlns="http://www.w3.org/2000/svg"
           height="16"
@@ -39,12 +40,10 @@ const SearchBar = (props) => {
         </svg>
       </div>
       <div className="buttons">
-        <button className="button" type="button">
+        <button className="button-sb" onClick={handleOnSubmit}>
           Search
         </button>
-        <button className="button" type="button">
-          Filter
-        </button>
+        <button className="button-sb">no expired certificate</button>
       </div>
     </form>
   );

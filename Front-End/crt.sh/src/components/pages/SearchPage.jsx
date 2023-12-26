@@ -5,9 +5,7 @@ const SearchPage = (props) => {
   const { getDataFromSearchBar } = props;
   return (
     <div className="center-div-search-page">
-      <div>
-        <span className="text-design">CYSTACK</span>
-      </div>
+      <p className="logo-design-sp">CYSTACK</p>
       <SearchBar getDataFromSearchBar={getDataFromSearchBar}></SearchBar>
     </div>
   );

@@ -1,37 +1,49 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./ResultPage.css";
 import axios from "axios";
-const ResultPage = (props) => {
-  const { data } = props;
+import LoadingScreen from "../LoadingScreen";
+import TableForm from "../TableForm";
+import EmailBox from "../EmailBox";
+const ResultPage = () => {
   const [result, setResult] = useState();
+  const [loading, setLoading] = useState(true);
+  const { name } = useParams();
+
   const getDataFromURL = async (url) => {
-    const response = await axios.get(url);
-    setResult(response.data);
-    console.log(response.data);
+    try {
+      const response = await axios.get(url);
+      setResult(response);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    getDataFromURL(`http://localhost:5000?search=${data}`);
-  }, [data]);
+    getDataFromURL(`http://localhost:5000?search=${name}`);
+  }, [name]);
+
+  if (loading) {
+    return (
+      <div className="main">
+        <EmailBox></EmailBox>
+        <LoadingScreen></LoadingScreen>
+      </div>
+    );
+  }
+  const table = result?.data?.length ? (
+    <>
+      <TableForm data={result}></TableForm>
+    </>
+  ) : (
+    result?.status === 200 && <div>Not Found</div>
+  );
 
   return (
     <div className="main">
-      <table className="center-table">
-        <tr>
-          <th>ID</th>
-          <th>issuer_name</th>
-          <th>Country</th>
-        </tr>
-        {result?.map((e) => {
-          return (
-            <tr key={e.id}>
-              <td>{e.id}</td>
-              <td>{e.issuer_name}</td>
-              <td>{e.common_name}</td>
-            </tr>
-          );
-        })}
-      </table>
+      <EmailBox></EmailBox>
+      <div className="table">{table}</div>
     </div>
   );
 };
