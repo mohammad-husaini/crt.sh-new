@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const SearchBar = (props) => {
   const [search, setSearch] = useState();
+  const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -12,9 +13,15 @@ const SearchBar = (props) => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if (search) {
-      navigate(`result/${search}`);
+    if (search && isChecked) {
+      navigate(`result/?q=${search}&exclude=expired`);
     }
+    if (search && !isChecked) {
+      navigate(`result/?q=${search}`);
+    }
+  };
+  const handleOnClick = (e) => {
+    setIsChecked(!isChecked);
   };
 
   return (
@@ -43,7 +50,14 @@ const SearchBar = (props) => {
         <button className="button-sb" onClick={handleOnSubmit}>
           Search
         </button>
-        <button className="button-sb">no expired certificate</button>
+        <button className="button-sb" onClick={handleOnClick} type="button">
+          <input
+            type="checkbox"
+            className="filter-cb"
+            checked={isChecked}
+          ></input>
+          <span>Exclude expired</span>
+        </button>
       </div>
     </form>
   );

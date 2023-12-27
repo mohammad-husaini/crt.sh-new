@@ -26,8 +26,11 @@ const fetchData = async (url) => {
 
 app.get("/", async (req, res) => {
   const search = req.query.search;
+  const expired = req.query.exclude;
   try {
-    const response = await fetchData(`https://crt.sh/?q=${search}&output=json`);
+    const response = await fetchData(
+      `https://crt.sh/?q=${search}&exclude=${expired}&output=json`
+    );
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error);

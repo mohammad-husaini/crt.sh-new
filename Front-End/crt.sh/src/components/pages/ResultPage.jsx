@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import "./ResultPage.css";
 import axios from "axios";
 import LoadingScreen from "../LoadingScreen";
@@ -8,8 +8,11 @@ import EmailBox from "../EmailBox";
 const ResultPage = () => {
   const [result, setResult] = useState();
   const [loading, setLoading] = useState(true);
-  const { name } = useParams();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const name = searchParams.get("q");
+  const expired = searchParams.get("exclude");
   const getDataFromURL = async (url) => {
     try {
       const response = await axios.get(url);
@@ -21,7 +24,11 @@ const ResultPage = () => {
   };
 
   useEffect(() => {
-    getDataFromURL(`http://localhost:5000?search=${name}`);
+    if (expired) {
+      getDataFromURL(`http://localhost:5000?search=${name}&exclude=${expired}`);
+    } else {
+      getDataFromURL(`http://localhost:5000?search=${name}`);
+    }
   }, [name]);
 
   if (loading) {

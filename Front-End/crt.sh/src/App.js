@@ -11,7 +11,7 @@ const App = () => {
         <Route index path="/" element={<SearchPage></SearchPage>}></Route>
         <Route
           index
-          path={`/result/:name`}
+          path={`/result`}
           element={<ResultPage></ResultPage>}
         ></Route>
       </Routes>
