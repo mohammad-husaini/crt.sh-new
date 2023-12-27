@@ -1,11 +1,12 @@
 .loader {
   position: absolute;
-  top: calc(50% - 32px);
-  left: calc(50% - 32px);
-  width: 64px;
-  height: 64px;
+  top: 50%;
+  left: 50%;
+  width: 6.4rem;
+  height: 6.4rem;
+  transform: translate(-50%, -150%);
   border-radius: 50%;
-  perspective: 800px;
+  perspective: 80rem;
 }
 
 .inner {
@@ -27,14 +28,14 @@
   right: 0%;
   top: 0%;
   animation: rotate-two 1s linear infinite;
-  border-right: 3px solid #4286f45b;
+  border-right: 0.3rem solid #4286f45b;
 }
 
 .inner.three {
   right: 0%;
   bottom: 0%;
   animation: rotate-three 1s linear infinite;
-  border-top: 3px solid #0062ff75;
+  border-top: 0.3rem solid #0062ff75;
 }
 
 @keyframes rotate-one {

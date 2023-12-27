@@ -3,7 +3,7 @@ import "./TableForm.css";
 const TableForm = (props) => {
   const { data } = props;
   return (
-    <table className="center-table">
+    <table>
       <thead>
         <tr className="fixed-tr">
           <th>ID</th>
@@ -15,7 +15,7 @@ const TableForm = (props) => {
           <th> Issuer Name </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="center-table">
         {data?.data?.map((e) => {
           return (
             <tr key={e.id}>

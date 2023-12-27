@@ -1,23 +1,31 @@
 import React, { useState } from "react";
 import "./EmailBox.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const EmailBox = () => {
+const EmailBox = (props) => {
+  const { name } = props;
   const [email, setEmail] = useState("");
   const [notificationPeriod, setNotificationPeriod] = useState(30);
 
+  const showToastMessage = () => {
+    toast.info("Subscription successful !", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
-        "http://your-backend-url/api/subscribe",
+        `http://localhost:5000/subscription/?search=${name}&exclude=expired`,
         {
           email,
           notificationPeriod,
         }
       );
-
+      showToastMessage();
+      setEmail("");
       console.log("Subscription successful:", response.data);
     } catch (error) {
       console.error("Error subscribing:", error.message);

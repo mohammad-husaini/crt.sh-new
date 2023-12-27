@@ -2,12 +2,18 @@ import React from "react";
 import "./SearchBar.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const SearchBar = (props) => {
   const [search, setSearch] = useState();
   const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
 
+  const showToastMessage = () => {
+    toast.error("Enter The Domain in Search Bar !", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+  };
   const handleOnChange = (e) => {
     setSearch(e.target.value);
   };
@@ -19,6 +25,7 @@ const SearchBar = (props) => {
     if (search && !isChecked) {
       navigate(`result/?q=${search}`);
     }
+    showToastMessage();
   };
   const handleOnClick = (e) => {
     setIsChecked(!isChecked);
@@ -55,6 +62,7 @@ const SearchBar = (props) => {
             type="checkbox"
             className="filter-cb"
             checked={isChecked}
+            onChange={() => {}}
           ></input>
           <span>Exclude expired</span>
         </button>

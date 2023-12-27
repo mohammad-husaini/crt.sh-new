@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "./ResultPage.css";
 import axios from "axios";
 import LoadingScreen from "../LoadingScreen";
 import TableForm from "../TableForm";
 import EmailBox from "../EmailBox";
+import NotFound from "../NotFound";
+import { CSVLink } from "react-csv";
+import { ToastContainer } from "react-toastify";
 const ResultPage = () => {
   const [result, setResult] = useState();
   const [loading, setLoading] = useState(true);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const name = searchParams.get("q");
   const expired = searchParams.get("exclude");
@@ -24,35 +27,26 @@ const ResultPage = () => {
   };
 
   useEffect(() => {
-    if (expired) {
-      getDataFromURL(`http://localhost:5000?search=${name}&exclude=${expired}`);
-    } else {
-      getDataFromURL(`http://localhost:5000?search=${name}`);
-    }
+    getDataFromURL(`http://localhost:5000?search=${name}&exclude=${expired}`);
   }, [name]);
 
   if (loading) {
-    return (
-      <div className="main">
-        <EmailBox></EmailBox>
-        <LoadingScreen></LoadingScreen>
-      </div>
-    );
+    return <LoadingScreen></LoadingScreen>;
   }
   const table = result?.data?.length ? (
-    <>
+    <div className="main">
+      <EmailBox name={name}></EmailBox>
+      <CSVLink filename="Certificate information" data={result?.data || []}>
+        <button className="download-button">Download Table</button>
+      </CSVLink>
       <TableForm data={result}></TableForm>
-    </>
+      <ToastContainer />
+    </div>
   ) : (
-    result?.status === 200 && <div>Not Found</div>
+    result?.status === 200 && <NotFound></NotFound>
   );
 
-  return (
-    <div className="main">
-      <EmailBox></EmailBox>
-      <div className="table">{table}</div>
-    </div>
-  );
+  return <div className="table">{table}</div>;
 };
 
 export default ResultPage;

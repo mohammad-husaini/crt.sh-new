@@ -1,14 +1,15 @@
 .info-box {
-  width: 25vw;
-
+  min-width: 25vw;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 3rem;
+  user-select: none;
 }
 
 .container {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
 
 .subscription-form {
@@ -17,30 +18,30 @@
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 label {
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 input,
 select {
-  padding: 10px;
+  padding: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 4px;
+  margin-top: 0.4rem;
 }
 
 .button {
   background-color: #4285f4;
   color: #fff;
-  padding: 10px;
+  padding: 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   cursor: pointer;
 }
 
