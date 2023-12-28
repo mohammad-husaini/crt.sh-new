@@ -8,25 +8,32 @@ const EmailBox = (props) => {
   const [email, setEmail] = useState("");
   const [notificationPeriod, setNotificationPeriod] = useState(30);
 
-  const showToastMessage = () => {
-    toast.info("Subscription successful !", {
+  const showToastMessage = (toastyMessage) => {
+    toast.info(toastyMessage, {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const handleOnClick = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `http://localhost:5000/subscription/?search=${name}&exclude=expired`,
+      let method = "";
+      e.target.value === "subscribe" ? (method = "post") : (method = "delete");
+      const response = await axios[`${method}`](
+        `http://localhost:5000/subscribe/?search=${name}&exclude=expired`,
         {
           email,
           notificationPeriod,
         }
       );
-      showToastMessage();
+
+      if (email) {
+        showToastMessage(response.data);
+      }
       setEmail("");
-      console.log("Subscription successful:", response.data);
     } catch (error) {
       console.error("Error subscribing:", error.message);
     }
@@ -62,9 +69,24 @@ const EmailBox = (props) => {
             </select>
           </div>
 
-          <button className="button" type="submit">
-            Subscribe
-          </button>
+          <div>
+            <button
+              className="button"
+              type="submit"
+              value="subscribe"
+              onClick={handleOnClick}
+            >
+              Subscribe
+            </button>
+            <button
+              className="button-red"
+              type="submit"
+              value="unsubscribe"
+              onClick={handleOnClick}
+            >
+              UnSubscribe
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -3,7 +3,8 @@ import "./SearchBar.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-const SearchBar = (props) => {
+
+const SearchBar = () => {
   const [search, setSearch] = useState();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -14,19 +15,24 @@ const SearchBar = (props) => {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   const handleOnChange = (e) => {
     setSearch(e.target.value);
   };
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
     if (search && isChecked) {
       navigate(`result/?q=${search}&exclude=expired`);
     }
+
     if (search && !isChecked) {
       navigate(`result/?q=${search}`);
     }
     showToastMessage();
   };
+
   const handleOnClick = (e) => {
     setIsChecked(!isChecked);
   };

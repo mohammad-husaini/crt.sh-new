@@ -27,7 +27,9 @@ const ResultPage = () => {
   };
 
   useEffect(() => {
-    getDataFromURL(`http://localhost:5000?search=${name}&exclude=${expired}`);
+    getDataFromURL(
+      `http://localhost:5000/data?search=${name}&exclude=${expired}`
+    );
   }, [name]);
 
   if (loading) {
@@ -40,7 +42,7 @@ const ResultPage = () => {
         <button className="download-button">Download Table</button>
       </CSVLink>
       <TableForm data={result}></TableForm>
-      <ToastContainer />
+      <ToastContainer limit={1} />
     </div>
   ) : (
     result?.status === 200 && <NotFound></NotFound>
