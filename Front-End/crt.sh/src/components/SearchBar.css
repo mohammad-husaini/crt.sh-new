@@ -18,10 +18,15 @@ li a {
 li a:hover {
   text-decoration: underline;
 }
-
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: 5rem;
+}
 .bar {
-  margin: 0 auto;
-  width: 57.5rem;
+  width: 100%;
+  max-width: 57.5rem;
   border-radius: 3rem;
   border: 1px solid #4285f4;
 }
@@ -35,10 +40,11 @@ li a:hover {
 .search-bar {
   height: 4.5rem;
   border: none;
-  width: 50rem;
+  width: 80%;
   font-size: 1.6rem;
   outline: none;
   user-select: none;
+  border-radius: 3rem;
 }
 .search-icon {
   height: 2rem;

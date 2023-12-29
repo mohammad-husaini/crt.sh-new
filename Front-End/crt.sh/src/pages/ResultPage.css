@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  text-align: center;
+  gap: 3rem;
+  margin: 0rem 5rem;
+  width: 100%;
+}
+.main-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(60%);
+}
+
+@media (max-width: 1385px) {
+  .main {
+    margin: 0;
+    gap: 0;
+  }
+}

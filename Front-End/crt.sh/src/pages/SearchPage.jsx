@@ -1,6 +1,6 @@
 import React from "react";
 import "./SearchPage.css";
-import SearchBar from "../SearchBar";
+import SearchBar from "../components/SearchBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

@@ -1,0 +1,15 @@
+.right-top {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  display: none;
+}
+
+.right-top:hover {
+  cursor: pointer;
+}
+@media (max-width: 1385px) {
+  .right-top {
+    display: block;
+  }
+}

@@ -1,7 +1,9 @@
 html {
   font-size: 10px;
   box-sizing: border-box;
-  overflow: visible;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 body {
   margin: 0;

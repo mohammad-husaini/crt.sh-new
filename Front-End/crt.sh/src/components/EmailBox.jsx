@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./EmailBox.css";
+import { CSVLink } from "react-csv";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const EmailBox = (props) => {
-  const { name } = props;
+  const { name, toggle, result } = props;
   const [email, setEmail] = useState("");
   const [notificationPeriod, setNotificationPeriod] = useState(30);
 
@@ -40,13 +41,16 @@ const EmailBox = (props) => {
   };
 
   return (
-    <div className="info-box">
+    <div className={`info-box ${toggle ? "menu-info-box" : ""}`}>
       <div className="container">
         <h1>Email Subscription Form</h1>
         <form onSubmit={handleSubmit} className="subscription-form">
           <div className="form-group">
-            <label htmlFor="email">Email address</label>
+            <label className="label" htmlFor="email">
+              Email address
+            </label>
             <input
+              className="input"
               type="email"
               id="email"
               placeholder="Enter email"
@@ -57,8 +61,11 @@ const EmailBox = (props) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="notificationPeriod">Notification Period</label>
+            <label className="label" htmlFor="notificationPeriod">
+              Notification Period
+            </label>
             <select
+              className="select"
               id="notificationPeriod"
               value={notificationPeriod}
               onChange={(e) => setNotificationPeriod(Number(e.target.value))}
@@ -89,6 +96,9 @@ const EmailBox = (props) => {
           </div>
         </form>
       </div>
+      <CSVLink filename="Certificate information" data={result?.data || []}>
+        <button className="download-button">Download Table</button>
+      </CSVLink>
     </div>
   );
 };

@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
             subscriber.email = email
             subscriber.domain = search?.toString()
             subscriber.notificationPeriod = notificationPeriod
-
             subscriber.save()
             res.status(201).send('Subscription successful');
         }

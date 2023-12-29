@@ -20,6 +20,7 @@ app.listen(PORT, () => {
         .initialize()
         .then(() => {
             console.log("connected to DB");
+
             wakeUp()
         })
         .catch((error) => {

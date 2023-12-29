@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SearchPage from "./components/pages/SearchPage";
-import ResultPage from "./components/pages/ResultPage";
+import SearchPage from "./pages/SearchPage";
+import ResultPage from "./pages/ResultPage";
 import Logo from "./components/Logo";
 const App = () => {
   return (

@@ -3,9 +3,8 @@ import "./NotFound.css";
 import { Link } from "react-router-dom";
 const NotFound = () => {
   return (
-    <div>
+    <div className="container-notfound ">
       <p className="p not-found"> Result not found </p>
-
       <div className="tipsiz">
         <div className="tipsiz-body">
           <div className="left-arm arm"></div>
